@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("<str:entry>", views.entries, name="entry" )
+    path("wiki/<str:entry>", views.entries, name="entry" )
 ]

@@ -9,7 +9,12 @@ def index(request):
     })
 
 def entries(request, entry):
+    description = util.convert_markdown( title = entry)
+    if description is None:
+        return render(request, 'encyclopedia/error.html', {
+            "description": f"Sorry, there is no information about <b>{entry}</b> in our encyclopedia..."
+        })
     return render (request, "encyclopedia/entry.html", {
         "title": entry,
-        "description": util.convert_markdown( title = entry)
+        "description": description
     })
