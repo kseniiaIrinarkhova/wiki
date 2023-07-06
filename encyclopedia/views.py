@@ -11,5 +11,5 @@ def index(request):
 def entries(request, entry):
     return render (request, "encyclopedia/entry.html", {
         "title": entry,
-        "description": util.get_entry( title = entry)
+        "description": util.convert_markdown( title = entry)
     })
