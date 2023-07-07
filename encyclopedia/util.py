@@ -37,6 +37,10 @@ def get_entry(title):
     except FileNotFoundError:
         return None
 
+errors = {
+    "404" : f"Sorry, there is no information about <b>*entry name*</b> in our encyclopedia..."
+}
+
 def convert_markdown(title):
     """
     Convert entry information from Markdown to Html

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from . import util
+import re
 
 
 def index(request):
@@ -11,8 +12,9 @@ def index(request):
 def entries(request, entry):
     description = util.convert_markdown( title = entry)
     if description is None:
+        error_404 = re.compile(r"\*entry name\*")
         return render(request, 'encyclopedia/error.html', {
-            "description": f"Sorry, there is no information about <b>{entry}</b> in our encyclopedia..."
+            "description": error_404.sub(entry, util.errors["404"])
         })
     return render (request, "encyclopedia/entry.html", {
         "title": entry,
