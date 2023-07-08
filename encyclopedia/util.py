@@ -37,8 +37,12 @@ def get_entry(title):
     except FileNotFoundError:
         return None
 
+'''
+global dictionary of errors' texts *n* is template for dynamic data
+'''
 errors = {
-    "404" : f"Sorry, there is no information about <b>*entry name*</b> in our encyclopedia..."
+    "404" : f"Sorry, there is no information about <b>*1*</b> in our encyclopedia...",
+    "search": f"There is no result for <b>*1*</b>. Try another keywords."
 }
 
 def convert_markdown(title):
@@ -49,3 +53,13 @@ def convert_markdown(title):
     if description is None:
         return description
     return markdown2.markdown(description)
+
+def list_entries_with_parameter(search_entry):
+    """
+    Returns a list of all names of encyclopedia entries 
+    according to the search parameter.
+    """
+    filter = re.compile(r"\w*"+search_entry+r"\w*",  re.IGNORECASE)
+    all_entries=list_entries()
+    return list(sorted(entry for entry in all_entries if filter.search(entry) is not None ))
+
