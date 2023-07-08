@@ -42,7 +42,8 @@ global dictionary of errors' texts *n* is template for dynamic data
 '''
 errors = {
     "404" : f"Sorry, there is no information about <b>*1*</b> in our encyclopedia...",
-    "search": f"There is no result for <b>*1*</b>. Try another keywords."
+    "search": f"There is no result for <b>*1*</b>. Try another keywords.",
+    "empty": "You must input the search value."
 }
 
 def convert_markdown(title):

@@ -6,16 +6,9 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-
-class SearchForm(forms.Form):
-    q = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Search Encyclopedia', 'class': 'search' }))
-    
-
-
 def index(request):
     return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries(),
-        "form": SearchForm()
+        "entries": util.list_entries()
     })
 
 def entries(request, entry):
@@ -26,20 +19,17 @@ def entries(request, entry):
         '''
         error_descr = re.compile(r"\*1\*")
         return render(request, 'encyclopedia/error.html', {
-            "description": error_descr.sub(entry, util.errors["404"]),
-            "form": SearchForm()
+            "description": error_descr.sub(entry, util.errors["404"])
         })
     return render (request, "encyclopedia/entry.html", {
         "title": entry,
-        "description": description,
-        "form": SearchForm()
+        "description": description
     })
 
 def search(request):
     if request.method == "POST":
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            search_entry = form.cleaned_data['q']
+        search_entry = request.POST['q']
+        if search_entry != "":
             '''
             Try to get list of entries that contain search entry
             '''
@@ -50,8 +40,7 @@ def search(request):
                 '''
                 error_descr = re.compile(r"\*1\*")
                 return render(request, 'encyclopedia/error.html', {
-                    "description": error_descr.sub(search_entry, util.errors["search"]),
-                    "form": SearchForm()
+                    "description": error_descr.sub(search_entry, util.errors["search"])
                 })  
             elif len(entries) == 1 and entries[0].casefold() == search_entry.casefold() :
                 '''
@@ -65,16 +54,15 @@ def search(request):
                 of entry name in encyclopedia, show the list of results
                 '''
                 return render(request, "encyclopedia/search.html", {
-                            "entries": entries,
-                            "form": SearchForm()
+                            "entries": entries
                         })
         else:
             '''
             If there is an error in search form, show validation check result
             '''
-            return render(request, "encyclopedia/search.html", {
-                "form": form
-            })
+            return render(request, 'encyclopedia/error.html', {
+                "description": util.errors["empty"]
+               })
     '''
     If the request method is get, redirect to index page
     '''
