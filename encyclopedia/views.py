@@ -67,3 +67,34 @@ def search(request):
     If the request method is get, redirect to index page
     '''
     return redirect("index")
+
+
+class EntryForm(forms.Form):
+    title = forms.CharField(widget=forms.TextInput(attrs={'name':'title', 'label':'Title'}))
+    description =  forms.CharField(widget=forms.Textarea(attrs={'name':'description', 'label':'Entity description', 'placeholder' : 'Describe new entity with all opportunities of Markdown format'}))
+
+'''
+View for creation a new entry in encyclopedia
+'''
+def addEntry(request):
+    if request.method == "POST":
+        form = EntryForm(request.POST)
+        if form.is_valid():
+            entryTitle = form.cleaned_data['title']
+            if util.get_entry( entryTitle )  is None:
+                util.save_entry(title=entryTitle, content = form.cleaned_data['description'])
+            else:
+                '''
+                If entry already exist in encyclopedia
+                '''
+                error_descr = re.compile(r"\*1\*")
+                return render(request, 'encyclopedia/error.html', {
+                    "description": error_descr.sub(entryTitle, util.errors["entryDuplication"])
+                })    
+        else:
+            return render(request, "encyclopedia/new_entry.html", {
+                "form": form
+            })
+    return render(request, "encyclopedia/new_entry.html", {
+        "form": EntryForm()
+    })
