@@ -5,5 +5,10 @@
 {% endblock %}
 
 {% block body %}
+<div class="toolbar">
+    <div class="tb-item-flex"></div>
+    <div class="tb-item-fixed">Read</div>
+    <div class="tb-item-fixed"><a href="/wiki/edit/{{title}}">Edit</a></div>
+</div>
     {{ description|safe }}
 {% endblock %}

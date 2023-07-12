@@ -44,7 +44,7 @@ errors = {
     "404" : f"Sorry, there is no information about <b>*1*</b> in our encyclopedia...",
     "search": f"There is no result for <b>*1*</b>. Try another keywords.",
     "empty": "You must input the search value.",
-    "entryDuplication": "The entry <b>*1*</b> is already in our encyclopedia. You cannot add existing item. However you could <a href='/wiki/*1*'>change</a> it."
+    "entryDuplication": "The entry <b>*1*</b> is already in our encyclopedia. You cannot add existing item. However you could <a href='/wiki/edit/*1*'>change</a> it."
 }
 
 def convert_markdown(title):

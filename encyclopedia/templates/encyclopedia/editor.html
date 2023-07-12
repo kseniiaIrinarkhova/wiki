@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block body %}
+<div class="toolbar">
+    <div class="tb-item-flex"></div>
+    <div class="tb-item-fixed"><a href="/wiki/{{title}}">Read</a></div>
+    <div class="tb-item-fixed">Edit</div>
+</div>
+<h1>You are making changes in <b>{{ title }}</b> entry.</h1>
+<form action="/wiki/edit/{{title}}" method="post">
+    {% csrf_token %}
+    {{ form.title.as_hidden }}
+    {{ form.description }}
+    <input type="submit" value="Save">
+</form>
+{% endblock %}

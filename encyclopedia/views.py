@@ -82,7 +82,7 @@ def addEntry(request):
         if form.is_valid():
             entryTitle = form.cleaned_data['title']
             if util.get_entry( entryTitle )  is None:
-                util.save_entry(title=entryTitle, content = form.cleaned_data['description'])
+                util.save_entry(title=entryTitle, content = form.cleaned_data['description'] )
             else:
                 '''
                 If entry already exist in encyclopedia
@@ -92,9 +92,49 @@ def addEntry(request):
                     "description": error_descr.sub(entryTitle, util.errors["entryDuplication"])
                 })    
         else:
+            print("something go wrong")
             return render(request, "encyclopedia/new_entry.html", {
                 "form": form
             })
     return render(request, "encyclopedia/new_entry.html", {
         "form": EntryForm()
+    })
+
+'''
+Define the view for changing existing entries
+'''
+def change_entry(request, entry):
+    if request.method == "POST":
+        form = EntryForm(request.POST)
+        if form.is_valid():
+            entryTitle = form.cleaned_data['title']
+            if util.get_entry( entryTitle ) is not None:
+                util.save_entry(title=entryTitle, content = form.cleaned_data['description'])
+                return redirect (f"/wiki/{entryTitle}", entry= entryTitle)
+            else:
+                '''
+                If there is no information about requested entry, show the error
+                '''
+                error_descr = re.compile(r"\*1\*")
+                return render(request, 'encyclopedia/error.html', {
+                                "description": error_descr.sub(entryTitle, util.errors["404"])
+                        })   
+        else:
+            return render(request, "encyclopedia/editor.html", {
+                "title": entry,
+                "form": form
+            })
+    description = util.get_entry( title = entry)
+    if description is None:
+        '''
+        If there is no information about requested entry, show the error
+        '''
+        error_descr = re.compile(r"\*1\*")
+        return render(request, 'encyclopedia/error.html', {
+            "description": error_descr.sub(entry, util.errors["404"])
+        })
+    return render(request, "encyclopedia/editor.html", {
+        "title": entry,
+        "form": EntryForm(initial={'description': description,
+                                   'title': entry})
     })
