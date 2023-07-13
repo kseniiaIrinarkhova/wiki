@@ -5,6 +5,7 @@ import re
 from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+import random
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -103,7 +104,7 @@ def addEntry(request):
 '''
 Define the view for changing existing entries
 '''
-def change_entry(request, entry):
+def changeEntry(request, entry):
     if request.method == "POST":
         form = EntryForm(request.POST)
         if form.is_valid():
@@ -138,3 +139,11 @@ def change_entry(request, entry):
         "form": EntryForm(initial={'description': description,
                                    'title': entry})
     })
+
+'''
+Definition of view for Random entry link
+'''
+def randomEntry(request):
+    entryList = util.list_entries()
+    entryTitle = entryList[random.randint(0, len(entryList))-1]
+    return redirect(f"/wiki/{entryTitle}", entry= entryTitle)
