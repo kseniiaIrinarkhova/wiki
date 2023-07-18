@@ -7,7 +7,7 @@ The definition of the initial distribution code could be found in [Project 1](ht
 - **Changes in HTML templates and static files**
     - *layout.html*: added action and csrf_token to search form, added links to 'Create new page' and 'Random page' in the sidebar.
     - *index.html*: added links to a list of encyclopedia entries
-    - *styles.css*: changed style for `textarea` element and added styles for `toolbar, tb-item-flex, tb-item-fixed` HTML-element classes. 
+    - *styles.css*: changed style for `textarea` element and added styles for `toolbar, tb-item-flex, tb-item-fixed, .search, .search input, .search button` HTML-element classes. 
 - **New HTML templates**
     - *entry.html*
 The new template provides information about the encyclopedia's entry. This template inherits from a base `layout.html`. Contained page title with entry name,  toolbar, and entry description. The toolbar provided information about the reading mode and the ability to go to the entry editor.
@@ -98,7 +98,7 @@ To install the current project locally user should download the whole code from 
 ## User guide
 On the initial page of the encyclopedia, the user could see the list of all pages in the encyclopedia. The user is able to look at any entry by clicking the link from the main page. On the entry page user sees the title and description of the entry and the current page mode. By default, the user is in the *Read* mode of the page. It is possible to change encyclopedia article information by clicking the **_Edit_** link in the page toolbar.
 When the user clicks **_Edit_** the editor is opened. The user sees the description of the editable entry and could add any type of information in Markdown syntax. After editing, the user should click the **Save** button.
-The user is able to search any encyclopedia entry by using a sidebar search box. From any page of the encyclopedia user could text request into the search box and press `Enter`.
+The user is able to search any encyclopedia entry by using a sidebar search box. From any page of the encyclopedia user could text request into the search box and press `Enter` or click `search` button.
 If there is one exactly the same as the requested entry in the encyclopedia - the user would be redirected to it. If there is more than one entry that title includes as a substring of the user's query then the user would see the search page with the list of results.
 The user is able to create a new entry by clicking the **_Create new Page_** link. After clicking, the user would be redirected to a new page editor. The user should provide the title of the new entry and the description. The description should be provided with Markdown syntax.
 After submitting information to the encyclopedia user could see 2 different pages. If users successfully submit a new entry, the entry page would be opened. If the user submits information about an already existing entry (the title is exactly the same), the error page would be opened with a proposal to edit the existing page instead of adding a duplicate entry.
