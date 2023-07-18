@@ -68,7 +68,7 @@ There are two options in this view
 1. `request.method` is **POST**
 System checked if form that sended by post request is valid.
 If form is valid then system checked if the entry is unique in encyclopedia.
-If there is a new entry then system save it.
+If there is a new entry then system saves it and redirects to a new entry's page. 
 System renders to the error page if entry with the same title is already exist in encyclopedia with error key `"entryDuplication"`
 If form is not valid then system renders to the new_entry.html with the same object of `EntryForm` class
 2. `request.method` is **GET**

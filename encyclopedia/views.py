@@ -83,7 +83,8 @@ def addEntry(request):
         if form.is_valid():
             entryTitle = form.cleaned_data['title']
             if util.get_entry( entryTitle )  is None:
-                util.save_entry(title=entryTitle, content = form.cleaned_data['description'] )                
+                util.save_entry(title=entryTitle, content = form.cleaned_data['description'] ) 
+                return redirect (f"/wiki/{entryTitle}", entry= entryTitle)               
             else:
                 '''
                 If entry already exist in encyclopedia
