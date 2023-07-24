@@ -1,5 +1,7 @@
 # Distinctiveness and Complexity
+This encyclopedia could provide you an opportunity to structure, adjust and modify all information that could be important for you. It is extremelly simple to use and thoughtfully implemented for improvements. You could keep all important for you information as entries of encyclopedia. It is simple to change entries using all features of Markdown languages. You could see all arcticles that you created in the index page of encyclopedia. Also, it is easy to find all relative entries by searching through encyclopedia using search in the sidebar. Encyclopedia prevents duplication of articles by offering to change an existing article with the same title instead of creating a new one or completely replacing the previous one.
 
+Moreover, you could simply extend the current encyclopedia with any new features you need. The structure of the project is simple and well-organized. You can find all project details below and additional information in the comments inside the code.
 # Technical documentation of the project
 ## Code specification
 The definition of the initial distribution code could be found in [Project 1](https://cs50.harvard.edu/web/2020/projects/1/wiki/)description. Development changes are listed below.
