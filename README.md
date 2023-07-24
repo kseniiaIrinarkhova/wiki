@@ -9,7 +9,7 @@ The definition of the initial distribution code could be found in [Project 1](ht
 - **Changes in HTML templates and static files**
     - *layout.html*: added action and csrf_token to search form, added links to 'Create new page' and 'Random page' in the sidebar.
     - *index.html*: added links to a list of encyclopedia entries
-    - *styles.css*: changed style for `textarea` element and added styles for `toolbar, tb-item-flex, tb-item-fixed, .search, .search input, .search button` HTML-element classes. 
+    - *styles.css*: changed style for `textarea` element and added styles for `toolbar, tb-item-flex, tb-item-fixed, .search, .search input, .search button` HTML-element classes and `error` HTML-element id. 
 - **New HTML templates**
     - *entry.html*
 The new template provides information about the encyclopedia's entry. This template inherits from a base `layout.html`. Contained page title with entry name,  toolbar, and entry description. The toolbar provided information about the reading mode and the ability to go to the entry editor.
@@ -28,7 +28,7 @@ errors = {
     "404" : f"Sorry, there is no information about <b>*1*</b> in our encyclopedia...",
     "search": f"There is no result for <b>*1*</b>. Try another keyword.",
     "empty": "You must input the search value.",
-    "entryDuplication": "The entry <b>*1*</b> is already in our encyclopedia. You cannot add existing items. However you could <a href='/wiki/edit/*1*'>change</a> it."
+    "entryDuplication": "The entry <b>*1*</b> is already in our encyclopedia. You cannot add existing items. However, you could <a href='/wiki/edit/*1*'>change</a> it."
 }
 ```
 Added function `convert_markdown(title)`, which takes entry title, searches entry in encyclopedia by it, if there is requested entry, return converted to HTML description of the entry. To convert the description from Markdown to Html `markdown2` library is imported and `markdown2.markdown()` is used.
