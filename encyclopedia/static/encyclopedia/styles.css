@@ -76,3 +76,10 @@ textarea {
     padding: 10px;
     margin: 5px;
 }
+
+#error {
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+    margin: 20px;
+}
